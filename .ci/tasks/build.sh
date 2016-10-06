@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ev
+
 WORK_DIR=$(pwd)
 cd $WORK_DIR/src/webapp
 npm install --loglevel warn > /dev/null
