@@ -7,5 +7,7 @@ npm install --loglevel warn > /dev/null
 npm test
 npm prune --production --loglevel warn > /dev/null
 
+ls -al $WORK_DIR
+ls -al $WORK_DIR/src
 ls -al $WORK_DIR/src/webpp
-# cp -rf $WORK_DIR/src/webpp $WORK_DIR/build
+cp -rf $WORK_DIR/src/webpp $WORK_DIR/build

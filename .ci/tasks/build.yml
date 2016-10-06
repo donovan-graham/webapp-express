@@ -11,7 +11,7 @@ inputs:
 - name: src
 
 outputs:
-  - name: build
+- name: build
 
 run:
   path: src/.ci/tasks/build.sh
