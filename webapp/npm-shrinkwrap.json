@@ -1363,11 +1363,6 @@
       "from": "nested-error-stacks@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/nested-error-stacks/-/nested-error-stacks-1.0.2.tgz"
     },
-    "nodemon": {
-      "version": "1.10.2",
-      "from": "nodemon@>=1.10.2 <2.0.0",
-      "resolved": "https://registry.npmjs.org/nodemon/-/nodemon-1.10.2.tgz"
-    },
     "nopt": {
       "version": "1.0.10",
       "from": "nopt@>=1.0.10 <1.1.0",

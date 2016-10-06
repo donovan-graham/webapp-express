@@ -3,7 +3,7 @@ set -ev
 
 WORK_DIR=$(pwd)
 cd $WORK_DIR/src/webapp
-npm install --no-bin-links --loglevel warn > /dev/null
+npm install --loglevel warn > /dev/null
 npm test
 npm prune --production --loglevel warn > /dev/null
 
