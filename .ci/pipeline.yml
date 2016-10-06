@@ -9,9 +9,9 @@ resources:
   type: docker-image
   source:
     email: {{docker-hub-email}}
-    username: {{docker-hub-username}}
+    username: dongraham
     password: {{docker-hub-password}}
-    repository: {{docker-hub-image-name}}
+    repository: dongraham/webapp-express
 
 
 jobs:
