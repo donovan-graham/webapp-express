@@ -1,0 +1,22 @@
+---
+resources:
+- name: src
+  type: git
+  source:
+    uri: https://github.com/donovan-graham/webapp-express.git
+
+- name: image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-hub-image-name}}
+
+
+jobs:
+- name: build
+  plan:
+  - get: src
+  - task: build
+    file: src/.ci/tasks/build.yml

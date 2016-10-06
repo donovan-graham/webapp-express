@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: .ci/Dockerfile.local
+    image: webapp:local
+    volumes:
+      - ./webapp:/data
+      - ~/.npm_docker/v6.7.0:/root/.npm
+    ports:
+      - 3000:3000
+    working_dir: /data
+    command: "npm run dev-server"

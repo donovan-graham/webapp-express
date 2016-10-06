@@ -1,0 +1,5 @@
+*.log
+.ci/credentials.yml
+
+node_modules/
+build/

@@ -1,0 +1,21 @@
+{
+  "name": "webapp",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "forever app.js",
+    "dev-server": "nodemon app.js",
+    "test": "echo \"Implement tests\" && exit 0"
+  },
+  "author": "Donovan Graham",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "forever": "^0.15.2",
+    "lodash": "^4.16.2",
+    "moment": "^2.15.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}
