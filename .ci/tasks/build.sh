@@ -15,7 +15,7 @@ cp -rf $SOURCE_DIR/.ci/Dockerfile $BUILD_DIR
 mkdir -p $BUILD_DIR/data
 cp -rf $SOURCE_DIR/webapp/* $BUILD_DIR/data
 
-GIT_COMMIT_HASH=sudo cat $GIT_DIR/HEAD | cut -d'/' -f3
+GIT_COMMIT_HASH=sudo cat $GIT_DIR/HEAD | cut -d'/' -f3 | cut -c1-7
 GIT_URL=sudo cat $GIT_DIR/config | grep url | cut -d'=' -f2 | tr -d ' '
 
 cat > $BUILD_DIR/build-args.json << EOL
@@ -24,3 +24,5 @@ cat > $BUILD_DIR/build-args.json << EOL
   "GIT_COMMIT_HASH": "$GIT_COMMIT_HASH"
 }
 EOL
+
+cat $BUILD_DIR/build-args.json
