@@ -24,5 +24,3 @@ cat > $BUILD_DIR/build-args.json << EOL
   "GIT_COMMIT_HASH": "${GIT_COMMIT_HASH}"
 }
 EOL
-
-cat $BUILD_DIR/build-args.json
