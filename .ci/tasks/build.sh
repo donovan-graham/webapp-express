@@ -15,9 +15,9 @@ cp -rf $SOURCE_DIR/.ci/Dockerfile $BUILD_DIR
 mkdir -p $BUILD_DIR/data
 cp -rf $SOURCE_DIR/webapp/* $BUILD_DIR/data
 
-GIT_BRANCH=cat $GIT_DIR/HEAD | cut -d'/' -f3
-GIT_COMMIT_HASH=cat $GIT_DIR/HEAD | cut -d':' -f2 | tr -d ' ' | xargs -I FILE cat $GIT_DIR/FILE | head -c7
-GIT_URL=cat $GIT_DIR/config | grep url | cut -d'=' -f2 | tr -d ' '
+GIT_BRANCH=sudo cat $GIT_DIR/HEAD | cut -d'/' -f3
+GIT_COMMIT_HASH=sudo cat $GIT_DIR/HEAD | cut -d':' -f2 | tr -d ' ' | xargs -I FILE sudo cat $GIT_DIR/FILE | head -c7
+GIT_URL=sudo cat $GIT_DIR/config | grep url | cut -d'=' -f2 | tr -d ' '
 
 cat > $BUILD_DIR/build-args.json << EOL
 {
