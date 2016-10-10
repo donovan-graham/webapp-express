@@ -18,10 +18,12 @@ cp -rf $SOURCE_DIR/webapp/* $BUILD_DIR/data
 GIT_COMMIT_HASH=sudo cat $GIT_DIR/HEAD | cut -d'/' -f3 | cut -c1-7
 GIT_URL=sudo cat $GIT_DIR/config | grep url | cut -d'=' -f2 | tr -d ' '
 
+echo ">>>" + $GIT_COMMIT_HASH
+
 cat > $BUILD_DIR/build-args.json << EOL
 {
-  "GIT_URL": "$GIT_URL",
-  "GIT_COMMIT_HASH": "$GIT_COMMIT_HASH"
+  "GIT_URL": "${GIT_URL}",
+  "GIT_COMMIT_HASH": "${GIT_COMMIT_HASH}"
 }
 EOL
 
