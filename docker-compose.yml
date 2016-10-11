@@ -8,7 +8,6 @@ services:
     image: webapp:local
     volumes:
       - ./webapp:/data
-      - ~/.npm_docker/v6.7.0:/root/.npm
     ports:
       - 3000:3000
     working_dir: /data

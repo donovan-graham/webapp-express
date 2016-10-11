@@ -1,4 +1,4 @@
-FROM node:6.7-slim
+FROM dongraham/node:devtool
 MAINTAINER Donovan Graham <donovan@platform7.com>
 
 ARG GIT_URL

@@ -7,13 +7,15 @@ GIT_DIR=$SOURCE_DIR/.git
 BUILD_DIR=$WORK_DIR/build
 
 cd $SOURCE_DIR/webapp
-npm install --no-optional --loglevel warn > /dev/null
+yarn install > /dev/null
 npm test
-npm prune --production --loglevel warn > /dev/null
 
 cp -rf $SOURCE_DIR/.ci/Dockerfile $BUILD_DIR
 mkdir -p $BUILD_DIR/data
+rm -rf node_modules
 cp -rf $SOURCE_DIR/webapp/* $BUILD_DIR/data
+cd $BUILD_DIR/data
+yarn install --production > /dev/null
 
 GIT_COMMIT_HASH=$(cat $GIT_DIR/HEAD | cut -d'/' -f3 | cut -c1-7)
 GIT_URL=$(cat $GIT_DIR/config | grep url | cut -d'=' -f2 | tr -d ' ')

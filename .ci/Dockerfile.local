@@ -1,6 +1,6 @@
-FROM node:6.7-slim
+FROM dongraham/node:devtool
 
-RUN mkdir -p /data
+VOLUME /data
 WORKDIR /data
 
 EXPOSE 3000
