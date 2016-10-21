@@ -1,16 +1,15 @@
 build:
-  bundle:
-    image: dongraham/node:devtool
-    commands:
-      - pwd
-      - ls -la
-      #
-      # - npm -g install yarn
-      # - cp /root/.ci/Dockerfile /drone
-      # - mkdir -p /drone/data
-      # - cp -rf /root/webapp/* /drone/data
-      # - cd /drone/data
-      # - yarn install > /dev/null
+  image: dongraham/node:devtool
+  commands:
+    - pwd
+    - ls -la
+    #
+    # - npm -g install yarn
+    # - cp /root/.ci/Dockerfile /drone
+    # - mkdir -p /drone/data
+    # - cp -rf /root/webapp/* /drone/data
+    # - cd /drone/data
+    # - yarn install > /dev/null
 
 # publish:
 #   docker:
