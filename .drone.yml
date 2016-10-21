@@ -11,9 +11,7 @@ build:
       # - cp -rf /root/webapp/* /drone/data
       # - cd /drone/data
       # - yarn install > /dev/null
-    when:
-      branch: drone
-#
+
 # publish:
 #   docker:
 #     username: $$DOCKER_HUB_USERNAME
@@ -26,3 +24,5 @@ build:
 #     build_args:
 #       - GIT_URL=$$DRONE_REPO
 #       - GIT_COMMIT_HASH=$$DRONE_COMMIT
+#   when:
+#     branch: master
