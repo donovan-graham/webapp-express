@@ -1,14 +1,21 @@
 build:
-  image: dongraham/node-dev:latest
-  commands:
-    - mkdir -p /drone/bakery/data
-    - cp /drone/src/.ci/Dockerfile /drone/bakery
-    - cp -rf /drone/src/webapp/* /drone/bakery/data
-    - cd /drone/bakery/data
-    - npm install --production > /dev/null
-    # - yarn install > /dev/null
-  when:
-    branch: drone
+  test:
+    image: dongraham/node-dev:latest
+    commands:
+      - cd /drone/src/webapp
+      - npm install --no-optional > /dev/null
+      - npm test
+
+  bake:
+    image: dongraham/node-dev:latest
+    commands:
+      - cd /drone/src/webapp
+      - npm prune --production > /dev/null
+      - mkdir -p /drone/bakery/data
+      - cp /drone/src/.ci/Dockerfile /drone/bakery
+      - cp -rf /drone/src/webapp/* /drone/bakery/data
+    when:
+      branch: drone
 
 publish:
   docker:
@@ -23,7 +30,77 @@ publish:
       - GIT_URL=$$DRONE_REPO
       - GIT_COMMIT_HASH=$$DRONE_COMMIT
     when:
-      branch: master
+      branch:
+        - master
+        - release-*
+
+# # http://readme.drone.io/plugins/artifactory/
+# publish:
+#   artifactory:
+#     url: http://arti.company.com
+#     username: admin
+#     password: password
+#     pom: pom.xml
+#     repo_key: libs-snapshot-local
+#     files:
+#       - target/*.jar
+#       - target/*.war
+
+# # http://readme.drone.io/plugins/npm/
+# publish:
+#   npm:
+#     username: $$NPM_USERNAME
+#     password: $$NPM_PASSWORD
+#     email: $$NPM_EMAIL
+#     registry: "http://myregistry:4873"
+#     always_auth: true
+
+# # http://readme.drone.io/plugins/rancher/
+# deploy:
+#   rancher:
+#     url: https://example.rancher.com
+#     access_key: 1234567abcdefg
+#     secret_key: abcdefg1234567
+#     service: drone/drone
+#     docker_image: drone/drone:latest
+
+# # http://readme.drone.io/plugins/ssh/
+# deploy:
+#   ssh:
+#     host: foo.com
+#     user: root
+#     port: 22
+#     commands:
+#       - echo hello
+#       - echo world
+
+
+# # http://readme.drone.io/plugins/downstream/
+# notify:
+#   downstream:
+#     repositories:
+#       - octocat/Hello-World
+#       - octocat/Spoon-Knife
+#     token: e3b0c44298fc1c149afbf4
+#     fork: true
+#     when:
+#       event: push
+#       branch: master
+#       success: true
+
+
+# # http://readme.drone.io/plugins/webhook/
+# notify:
+#   webhook:
+#     urls:
+#       - https://your.webhook/...
+#       - https://your.other.webhook/...
+#     content_type: application/yaml
+#     template: >
+#       repo: {{repo.full_name}}
+#       build: {{build.number}}
+#       commit: {{build.commit}}
+
 
 notify:
   email:
