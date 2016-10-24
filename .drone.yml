@@ -1,28 +1,42 @@
 build:
-  bundle:
-    image: dongraham/node:devtool
-    commands:
-      - pwd
-      - ls -la
-      #
-      # - npm -g install yarn
-      # - cp /root/.ci/Dockerfile /drone
-      # - mkdir -p /drone/data
-      # - cp -rf /root/webapp/* /drone/data
-      # - cd /drone/data
-      # - yarn install > /dev/null
+  image: dongraham/node-dev:latest
+  commands:
+    - mkdir -p /drone/bakery/data
+    - cp /drone/src/.ci/Dockerfile /drone/bakery
+    - cp -rf /drone/src/webapp/* /drone/bakery/data
+    - cd /drone/bakery/data
+    - npm install --production > /dev/null
+    # - yarn install > /dev/null
     when:
       branch: drone
-#
-# publish:
-#   docker:
-#     username: $$DOCKER_HUB_USERNAME
-#     password: $$DOCKER_HUB_PASSWORD
-#     email: $$DOCKER_HUB_EMAIL
-#     repo: dongraham/drone-express
-#     tag: latest
-#     file: Dockerfile.drone
-#     context: /                       # context - the context path to use, defaults to root of the git repo
-#     build_args:
-#       - GIT_URL=$$DRONE_REPO
-#       - GIT_COMMIT_HASH=$$DRONE_COMMIT
+
+publish:
+  docker:
+    username: $$DOCKER_HUB_USERNAME
+    password: $$DOCKER_HUB_PASSWORD
+    email: $$DOCKER_HUB_EMAIL
+    repo: dongraham/drone-express
+    tag: "latest"
+    file: /drone/bakery/Dockerfile
+    context: /drone/bakery        # context - the context path to use, defaults to root of the git repo
+    build_args:
+      - GIT_URL=$$DRONE_REPO
+      - GIT_COMMIT_HASH=$$DRONE_COMMIT
+    when:
+      branch: master
+
+notify:
+  email:
+    from: $$EMAIL_FROM
+    host: $$EMAIL_HOST
+    port: $$EMAIL_PORT
+    username: $$EMAIL_USERNAME
+    password: $$EMAIL_PASSWORD
+    recipients:
+      - $$EMAIL_RECIPIENT
+    subject: >
+      [{{ build.status }}]
+      {{ repo.owner }}/{{ repo.name }}
+      ({{ build.branch }} - {{ truncate build.commit 8 }})
+    # template: >
+    #   https://git.io/vgvPz

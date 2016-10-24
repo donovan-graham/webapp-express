@@ -1,5 +1,7 @@
 *.log
 .ci/credentials.yml
+secrets.yml
+
 
 node_modules/
 build/
