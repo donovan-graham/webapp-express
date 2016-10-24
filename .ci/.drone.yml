@@ -7,8 +7,8 @@ build:
     - cd /drone/bakery/data
     - npm install --production > /dev/null
     # - yarn install > /dev/null
-    when:
-      branch: drone
+  when:
+    branch: drone
 
 publish:
   docker:
